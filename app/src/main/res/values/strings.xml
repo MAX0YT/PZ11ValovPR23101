@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PZ11</string>
+    <string name="sun">Солнце</string>
+    <string name="grass">Трава</string>
+    <string name="sky">Небо</string>
+    <string name="clock">Часы</string>
+    <string name="hour">Стрелка</string>
+    <string name="raindow_dash">Рейнбоу Дэш</string>
+    <string name="pinkie_pie">Пинки Пай</string>
+    <string name="cloud">Облако</string>
+    <string name="lightning">Молния</string>
+</resources>
