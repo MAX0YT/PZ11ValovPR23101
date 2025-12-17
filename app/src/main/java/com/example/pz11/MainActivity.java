@@ -22,17 +22,36 @@ public class MainActivity extends Activity {
         Animation sunRiseAnimation = AnimationUtils.loadAnimation(this, R.anim.sun_rise);
         sunImageView.startAnimation(sunRiseAnimation);
 
-        ImageView rainbowDash = findViewById(R.id.rainbow_dash);
-        ImageView lightning = findViewById(R.id.lightning);
-        ImageView pinkiePie = findViewById(R.id.pinkie_pie);
+        ImageView pp = findViewById(R.id.pp);
+        Animation ppAnim = AnimationUtils.loadAnimation(this, R.anim.pp);
+        pp.startAnimation(ppAnim);
+        Animation ppFallAnim = AnimationUtils.loadAnimation(this, R.anim.pp_fall);
 
-        Animation bounceUp = AnimationUtils.loadAnimation(this, R.anim.bounce_up);
-        Animation bounceDown = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        ImageView magic = findViewById(R.id.magic);
+        Animation magicAnim = AnimationUtils.loadAnimation(this, R.anim.magic);
+        magic.startAnimation(magicAnim);
+        Animation magicDelAnim = AnimationUtils.loadAnimation(this, R.anim.magic_del);
 
-        bounceUp.setAnimationListener(new Animation.AnimationListener() {
+        magicAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationEnd(Animation animation) {
-                pinkiePie.startAnimation(bounceDown);
+                magic.startAnimation(magicDelAnim);
+                magicDelAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        pp.startAnimation(ppFallAnim);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+                });
             }
 
             @Override
@@ -45,61 +64,5 @@ public class MainActivity extends Activity {
 
             }
         });
-
-        bounceDown.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                pinkiePie.startAnimation(bounceUp);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-        });
-
-        pinkiePie.startAnimation(bounceUp);
-
-        Animation flyInAnimation = AnimationUtils.loadAnimation(this, R.anim.fly_in);
-        rainbowDash.startAnimation(flyInAnimation);
-
-        flyInAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {}
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                new Handler().postDelayed(() -> {
-                    Animation lightningAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.lightning_flash);
-
-                    lightning.startAnimation(lightningAnimation);
-
-                    lightningAnimation.setAnimationListener(new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {}
-
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
-                            Animation flyOutAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fly_out);
-                            lightning.setImageAlpha(0);
-                            rainbowDash.startAnimation(flyOutAnimation);
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {}
-                    });
-                }, 100);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {}
-        });
-
-
     }
 }
